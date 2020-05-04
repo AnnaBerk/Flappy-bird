@@ -19,6 +19,21 @@ const getReady = {
             ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x, this.y, this.w, this.h);
        
     }
+}
+
+const gameOver = {
+    sX : 175,
+    sY : 228,
+    w : 225,
+    h : 202,
+    x : cvs.width/2 - 225/2,
+    y : 90,
+    
+    draw: function(){
+        
+            ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x, this.y, this.w, this.h);   
+        
+    }
     
 }
 
@@ -84,6 +99,7 @@ function draw(){
     fg.draw();
     bird.draw();
     getReady.draw();
+    
 }
 
 
