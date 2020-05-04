@@ -6,6 +6,22 @@ let frames = 0;
 const sprite = new Image();
 sprite.src = "img/sprite.png";
 
+const getReady = {
+    sX : 0,
+    sY : 228,
+    w : 173,
+    h : 152,
+    x : cvs.width/2 - 173/2,
+    y : 80,
+    
+    draw: function(){
+     
+            ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x, this.y, this.w, this.h);
+       
+    }
+    
+}
+
 const bg = {
     sX : 0,
     sY : 0,
@@ -52,7 +68,7 @@ const bird = {
     h : 26,
     
     frame: 0,
-    
+
     draw : function(){
         let bird = this.animation[this.frame];
         
@@ -67,6 +83,7 @@ function draw(){
     bg.draw();
     fg.draw();
     bird.draw();
+    getReady.draw();
 }
 
 
