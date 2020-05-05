@@ -6,6 +6,27 @@ let frames = 0;
 const sprite = new Image();
 sprite.src = "img/sprite.png";
 
+const state ={
+    current : 0,
+    getReady : 0,
+    game : 1,
+    over : 2,
+}
+
+cvs.addEventListener("click", function(evt){
+    switch(state.current){
+        case state.getReady:
+            state.current = state.game;
+            break;
+        case state.game:
+            bird.flap();
+            break;
+        case state.over:
+             state.current = state.getReady;
+            break;
+    }
+});
+
 const getReady = {
     sX : 0,
     sY : 228,
@@ -15,9 +36,9 @@ const getReady = {
     y : 80,
     
     draw: function(){
-     
+        if(state.current == state.getReady){
             ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x, this.y, this.w, this.h);
-       
+        }
     }
 }
 
@@ -30,9 +51,9 @@ const gameOver = {
     y : 90,
     
     draw: function(){
-        
+        if(state.current == state.over){
             ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x, this.y, this.w, this.h);   
-        
+        }
     }
     
 }
@@ -68,6 +89,7 @@ const fg = {
         
         ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x+ this.w, this.y, this.w, this.h);
     },
+   
 }
 
 const bird = {
@@ -90,7 +112,11 @@ const bird = {
         ctx.drawImage(sprite, bird.sX, bird.sY, this.w, this.h, this.x - this.w/2, this.y - this.h/2, this.w, this.h);
         
     },
-}
+    flap : function(){
+
+    },
+};
+
 function draw(){
     ctx.fillStyle = "#70c5ce";
     ctx.fillRect(0, 0, cvs.width, cvs.height);
@@ -99,7 +125,7 @@ function draw(){
     fg.draw();
     bird.draw();
     getReady.draw();
-    
+    gameOver.draw();
 }
 
 
