@@ -115,6 +115,12 @@ const bird = {
     flap : function(){
 
     },
+
+    update: function(){
+        this.period = state.current == state.getReady ? 10 : 5;
+        this.frame += frames%this.period == 0 ? 1 : 0;
+        this.frame = this.frame%this.animation.length;
+    }
 };
 
 function draw(){
@@ -130,7 +136,7 @@ function draw(){
 
 
 function update(){
-
+     bird.update();
 }
 
 function loop(){
