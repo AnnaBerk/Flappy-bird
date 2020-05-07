@@ -117,7 +117,7 @@ const bird = {
         
     },
     flap : function(){
-
+        this.speed =- this.jump;
     },
 
     update: function(){
