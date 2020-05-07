@@ -106,6 +106,10 @@ const bird = {
     
     frame: 0,
 
+    gravity : 0.15,
+    speed : 0,
+    jump : 3,
+
     draw : function(){
         let bird = this.animation[this.frame];
         
@@ -120,6 +124,13 @@ const bird = {
         this.period = state.current == state.getReady ? 10 : 5;
         this.frame += frames%this.period == 0 ? 1 : 0;
         this.frame = this.frame%this.animation.length;
+
+        if(state.current == state.getReady){
+
+        }else{
+            this.speed += this.gravity;
+            this.y += this.speed;
+        }
     }
 };
 
