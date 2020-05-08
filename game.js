@@ -6,6 +6,8 @@ let frames = 0;
 const sprite = new Image();
 sprite.src = "img/sprite.png";
 
+const DEGREE = Math.PI/180;
+
 const state ={
     current : 0,
     getReady : 0,
@@ -109,15 +111,20 @@ const bird = {
     gravity : 0.15,
     speed : 0,
     jump : 3,
+    rotation : 0,
 
     draw : function(){
         let bird = this.animation[this.frame];
         
-        ctx.drawImage(sprite, bird.sX, bird.sY, this.w, this.h, this.x - this.w/2, this.y - this.h/2, this.w, this.h);
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.drawImage(sprite, bird.sX, bird.sY, this.w, this.h,- this.w/2, - this.h/2, this.w, this.h);
         
+        ctx.restore();
     },
     flap : function(){
-        this.speed =- this.jump;
+        this.speed = - this.jump;
     },
 
     update: function(){
@@ -127,6 +134,7 @@ const bird = {
 
         if(state.current == state.getReady){
             this.y = 150;
+            this.rotation = 0 * DEGREE;
         }else{
             this.speed += this.gravity;
             this.y += this.speed;
@@ -136,6 +144,12 @@ const bird = {
                 if(state.current == state.game){
                     state.current = state.over;
                 }
+            }
+            if(this.speed >= this.jump){
+                this.rotation = 90 * DEGREE;
+                this.frame = 1;
+            }else{
+                this.rotation = -25 * DEGREE;
             }
         }
     }
