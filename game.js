@@ -118,6 +118,7 @@ const bird = {
     speed : 0,
     jump : 3,
     rotation : 0,
+    radius : 12,
 
     draw : function(){
         let bird = this.animation[this.frame];
@@ -202,7 +203,18 @@ const pipes = {
         }
         for( let i = 0; i < this.position.length; i++){
             let p = this.position[i];
-            p.x -= this.dx;
+            
+            let bottomPipeYPos = p.y + this.h + this.gap;
+
+            if(bird.x + bird.radius > p.x && bird.x - bird.radius < p.x + this.w &&
+               bird.y + bird.radius > p.y && bird.y - bird.radius < p.y + this.h){
+                   state.current = state.over;
+               }
+            if(bird.x + bird.radius > p.x && bird.x - bird.radius < p.x + this.w &&
+                bird.y + bird.radius > bottomPipeYPos && bird.y - bird.radius < bottomPipeYPos + this.h){
+                    state.current = state.over;
+                }
+                p.x -= this.dx;
 
             if(p.x + this.w <=0){
                 this.position.shift();
