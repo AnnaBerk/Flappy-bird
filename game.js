@@ -91,6 +91,12 @@ const fg = {
         
         ctx.drawImage(sprite, this.sX, this.sY, this.w, this.h, this.x+ this.w, this.y, this.w, this.h);
     },
+
+    update: function(){
+        if(state.current == state.game){
+            this.x = (this.x - this.dx)%(this.w/2)
+        }
+    }
    
 }
 
@@ -169,6 +175,7 @@ function draw(){
 
 function update(){
      bird.update();
+     fg.update();
 }
 
 function loop(){
